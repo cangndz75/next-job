@@ -15,7 +15,9 @@ export function Navbar() {
         <ThemeToggle />
         <Link href="/about">About</Link>
         <Link href="/jobs">Jobs</Link>
-        <Button>Login</Button>
+        <Link href="/login">
+          <Button>Login</Button>
+        </Link>
       </div>
     </nav>
   );
