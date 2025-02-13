@@ -1,9 +1,19 @@
-import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { auth, signOut } from "../utils/auth";
 
-export default function Home() {
+export default async function Home() {
+  const session = await auth();
   return (
     <div>
-      <h1>Home</h1>
+      {session?.user ? (
+        <div>
+          <h1>Welcome {session.user.name}</h1>
+        </div>
+      ) : (
+        <div>
+          <h1>Welcome Guest</h1>
+        </div>
+      )}
     </div>
   );
 }
