@@ -1,8 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "../ui/button";
+import { Button, buttonVariants } from "../ui/button";
 import { ThemeToggle } from "../general/ThemeToggle";
-export function Navbar() {
+import { auth, signOut } from "@/app/utils/auth";
+export async function Navbar() {
+  const session = await auth();
+
   return (
     <nav className="flex items-center justify-between py-5">
       <Link href="/" className="flex items-center gap-2">
@@ -15,9 +18,23 @@ export function Navbar() {
         <ThemeToggle />
         <Link href="/about">About</Link>
         <Link href="/jobs">Jobs</Link>
-        <Link href="/login">
-          <Button>Login</Button>
-        </Link>
+        {session?.user ? (
+          <form
+            action={async () => {
+              "use server";
+              await signOut({ redirectTo: "/" });
+            }}
+          >
+            <Button variant="destructive">Logout</Button>
+          </form>
+        ) : (
+          <Link
+            href="/login"
+            className={buttonVariants({ variant: "green", size: "lg" })}
+          >
+            Login
+          </Link>
+        )}
       </div>
     </nav>
   );

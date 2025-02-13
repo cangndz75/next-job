@@ -1,3 +1,4 @@
+import { LoginForm } from "@/components/forms/LoginForm";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -16,6 +17,7 @@ export default function Login() {
             Gündüz<span className="text-primary">Job Portal</span>
           </h1>
         </Link>
+        <LoginForm />
       </div>
     </div>
   );
